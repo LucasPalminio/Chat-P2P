@@ -56,7 +56,7 @@
           <text value="Cerrar"/>
         </properties>
       </component>
-      <scrollpane id="7712e">
+      <scrollpane id="7712e" binding="scroll">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -65,7 +65,9 @@
         <children>
           <component id="3c667" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
             <constraints/>
-            <properties/>
+            <properties>
+              <font size="18"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

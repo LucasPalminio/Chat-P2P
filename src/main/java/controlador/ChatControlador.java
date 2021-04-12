@@ -26,7 +26,9 @@ public class ChatControlador implements ActionListener,Runnable {
         this.puertoOrigen = puertoOrigen;
         chatGui = new ChatGui();
         chatGui.enviarButton.addActionListener(this);
+        chatGui.cerrarButton.addActionListener(this);
         chatGui.nombreUsuarioLabel.setText(nombreUsuario);
+        chatGui.modoLabel.setText("Puerto: "+puertoOrigen);
         chatGui.textArea1.setEditable(false);
 
         chatGui.setVisible(true);
@@ -40,7 +42,11 @@ public class ChatControlador implements ActionListener,Runnable {
     }
     @Override
     public void actionPerformed(ActionEvent e) { //Enviar, Salida
-        if (e.getSource() == chatGui.enviarButton){
+        if (e.getSource() == chatGui.enviarButton ){
+            if(chatGui.textField1.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Usted no ha escrito nada, inténtelo nuevamente");
+                return;
+            }
             try {
                 Socket miSocket = new Socket(ipDestino,puertoDestino);
                 DataOutputStream dataOutputStream = new DataOutputStream(miSocket.getOutputStream());
@@ -55,6 +61,13 @@ public class ChatControlador implements ActionListener,Runnable {
                 JOptionPane.showMessageDialog(null,"No se pudo conectar", "Error de conexión",JOptionPane.ERROR_MESSAGE);
             }
             chatGui.textField1.setText(null);
+        }
+        if(e.getSource()==chatGui.cerrarButton){
+            int opcion = JOptionPane.showConfirmDialog(null,"¿De verdad desea finalizar la conversación?","Sali",JOptionPane.YES_NO_OPTION);
+            if (opcion == 0){
+                chatGui.dispose();
+                System.exit(0);
+            }
         }
     }
     @Override
